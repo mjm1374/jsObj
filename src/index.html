@@ -7,8 +7,99 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src = "./assets/faker.min.js" type = "text/javascript"></script>
+
+  
 </head>
 <body>
-  <app-root></app-root>
+ <h2>jsObject Constructors</h2>
+
+<p id="demo"></p>
+
+<hr>
+
+<app-root></app-root>
 </body>
+
+  
+  <script>
+    faker.locale = "en";
+    
+    
+    // Constructor function for Person objects
+    function Person( id, firstName,lastName,age,eyeColor, life) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.eyeColor = eyeColor;
+        this.life = life;
+        
+        this.changeName = function (name) {
+            this.lastName = name;
+        };
+        this.fullName = function () {
+          return this.firstName + " " + this.lastName;
+          
+        };
+     
+    }
+    
+    function rndStr() {
+      
+      return Math.random().toString(36).substring(10);
+      
+    }
+    function rndTF (){
+      return random_boolean = Math.random() >= 0.5;
+    }
+    //Create an array of people
+     var people = [];
+    
+    // Create a Person objects
+    //people.push(new Person("Sally","Rally",48,"green",true));
+    //people.push(new Person("Mike","Mc",49,"hael",true));
+    //people.push(new Person("Jenn","Hodge",43,"blue",false));
+    
+    function getinfo(id){
+      let thisGuy =  people[(id -1)];
+      alert(thisGuy.fullName() + " is " + getLife(thisGuy.life));
+    }
+    for (i = 0; i < 5000; i++) {faker.name.findName();
+    people.push(new Person((people.length +1),faker.name.firstName(),faker.name.lastName(),48,"green",rndTF()));
+}
+
+function getLife(chklife){
+  
+   let life = "alive";
+    if (chklife != true ) {
+      life = "dead";
+      }
+      
+      return life;
+  
+}
+    
+    //// Change last name
+    people[0].changeName("Jensen");
+    
+    // Diplay last name
+    //document.getElementById("demo").innerHTML ="My mother's last name is " + people[0].lastName;
+     var writeIt = "";
+     
+      for (var x in people) {
+        console.log(people[x].fullName());
+       
+        writeIt = writeIt + people[x].id + ": <a href='javascript:getinfo(" + people[x].id  + ");'>" + people[x].fullName() + "</a> is " + getLife(people[x].life) + "<br>";
+      }
+      
+      console.log(people.length);
+      //console.log(Math.random().toString(36).substring(7));
+      
+    // Diplay last name
+    document.getElementById("demo").innerHTML = writeIt;
+    console.log(people.map(peep => peep.length));
+    
+  </script>
+  
 </html>
